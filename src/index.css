@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: #05060b;
+  font-family: "Inter", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@keyframes cbg-flow {
+  0%   { stroke-dashoffset: 240; opacity: 0.15; }
+  50%  { opacity: 0.9; }
+  100% { stroke-dashoffset: 0; opacity: 0.15; }
+}
+
+@keyframes cbg-glow-pulse {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 0.9; }
+}
+
+.circuit-animated-svg .cbg-line {
+  stroke-dasharray: 240;
+  animation: cbg-flow 4s linear infinite;
+}
+
+.circuit-animated-svg .cbg-pulse {
+  animation: cbg-glow-pulse 3s ease-in-out infinite;
+}
