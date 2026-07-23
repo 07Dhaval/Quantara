@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 
 const Navbar = () => {
@@ -22,12 +23,12 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Matches the reference: Pages / About / Pricing / Blog
+  // "to" ab actual page routes hain, "#" anchors nahi
   const navLinks = [
-    { name: "Pages", href: "#pages" },
-    { name: "About", href: "#about" },
-    { name: "Pricing", href: "#pricing" },
-    { name: "Blog", href: "#blog" },
+    { name: "Home", to: "/" },
+    { name: "About", to: "/about" },
+    { name: "Features", to: "/features" },
+    { name: "Blog", to: "/blog" },
   ];
 
   return (
@@ -55,25 +56,31 @@ const Navbar = () => {
 
           {/* Logo */}
 
-          <a href="#home" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <img
               src={logo}
               alt="Quantara"
               className="h-10 sm:h-11 md:h-28 w-auto object-contain"
             />
-          </a>
+          </Link>
 
           {/* Desktop Menu */}
 
           <nav className="hidden lg:flex items-center gap-10">
             {navLinks.map((item) => (
-              <a
+              <NavLink
                 key={item.name}
-                href={item.href}
-                className="relative text-[16px] font-medium text-white/90 transition-all duration-300 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#7B61FF] after:transition-all after:duration-300 hover:after:w-full"
+                to={item.to}
+                className={({ isActive }) =>
+                  `relative text-[16px] font-medium transition-all duration-300 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-[#7B61FF] after:transition-all after:duration-300 ${
+                    isActive
+                      ? "text-white after:w-full"
+                      : "text-white/90 hover:text-white after:w-0 hover:after:w-full"
+                  }`
+                }
               >
                 {item.name}
-              </a>
+              </NavLink>
             ))}
           </nav>
 
@@ -109,14 +116,14 @@ const Navbar = () => {
           <div className="flex flex-col gap-5">
 
             {navLinks.map((item) => (
-              <a
+              <NavLink
                 key={item.name}
-                href={item.href}
+                to={item.to}
                 onClick={() => setMenuOpen(false)}
                 className="text-white text-lg"
               >
                 {item.name}
-              </a>
+              </NavLink>
             ))}
 
             <button className="mt-4 rounded-xl border border-white/15 bg-white/5 py-3 text-white backdrop-blur-xl">
