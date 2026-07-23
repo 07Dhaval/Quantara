@@ -22,12 +22,15 @@ const desktopPositions = [
   { col: 4, row: 4 },
 ];
 
-const IconBox = ({ src }) => (
-  <div className="w-full aspect-square rounded-2xl bg-white/[0.04] border border-white/5 flex items-center justify-center p-3">
+const IconBox = ({ src, delay = 0 }) => (
+  <div
+    className="w-full aspect-square rounded-2xl bg-white/[0.04] border border-white/5 flex items-center justify-center p-3 opacity-0 animate-icon-in transition-all duration-300 hover:bg-white/[0.08] hover:border-white/10 hover:-translate-y-1 hover:scale-[1.04]"
+    style={{ animationDelay: `${delay}ms`, animationFillMode: "forwards" }}
+  >
     <img
       src={src}
       alt=""
-      className="w-full h-full object-contain"
+      className="w-full h-full object-contain transition-transform duration-300 hover:scale-110"
     />
   </div>
 );
@@ -35,6 +38,23 @@ const IconBox = ({ src }) => (
 const TrustedNetwork = () => {
   return (
     <section className="w-full bg-[#050B14] px-5 py-16 sm:py-20 lg:py-24">
+      {/* Keyframes for entrance animation */}
+      <style>{`
+        @keyframes icon-in {
+          0% {
+            opacity: 0;
+            transform: translateY(16px) scale(0.94);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+        .animate-icon-in {
+          animation: icon-in 0.6s ease-out;
+        }
+      `}</style>
+
       <div className="max-w-[900px] mx-auto">
         {/* Heading */}
         <div className="text-center max-w-[680px] mx-auto">
@@ -56,7 +76,7 @@ const TrustedNetwork = () => {
         {/* Mobile / Tablet: simple grid, no stagger */}
         <div className="mt-12 sm:mt-14 lg:hidden grid grid-cols-3 sm:grid-cols-4 gap-4 max-w-[420px] sm:max-w-[520px] mx-auto">
           {icons.map((src, i) => (
-            <IconBox key={i} src={src} />
+            <IconBox key={i} src={src} delay={i * 80} />
           ))}
         </div>
 
@@ -77,7 +97,7 @@ const TrustedNetwork = () => {
                 gridRow: desktopPositions[i].row,
               }}
             >
-              <IconBox src={src} />
+              <IconBox src={src} delay={i * 100} />
             </div>
           ))}
         </div>
