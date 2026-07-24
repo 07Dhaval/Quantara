@@ -16,8 +16,6 @@ const Home = () => {
       <Security />
       <Community />
       <Stats />
-      <FAQ />
-      <CTA />
     </>
   );
 };

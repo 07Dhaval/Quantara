@@ -55,25 +55,12 @@ const CircuitAnimatedBg = ({ className = "" }) => {
       preserveAspectRatio="xMaxYMid meet"
     >
       <defs>
-        <linearGradient id="cbg-chip" x1="1" x2="0" y1="0.54" y2="0.46">
-          <stop offset="0" stopColor="rgb(27,27,27)" />
-          <stop offset="1" stopColor="rgb(50,50,52)" />
+        {/* indigo → cyan flow color, matches the reference animation */}
+        <linearGradient id="cbg-line-gradient" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="rgb(99,70,239)" />
+          <stop offset="55%" stopColor="rgb(91,109,255)" />
+          <stop offset="100%" stopColor="rgb(94,190,250)" />
         </linearGradient>
-        <linearGradient id="cbg-shield" x1="0.5" x2="0.5" y1="0" y2="1">
-          <stop offset="0" stopColor="rgb(89,131,231)" />
-          <stop offset="1" stopColor="rgb(121,210,252)" />
-        </linearGradient>
-        <radialGradient id="cbg-glow-amber" cx="50%" cy="50%" r="60%">
-          <stop offset="0" stopColor="rgb(234,179,8)" stopOpacity="0.9" />
-          <stop offset="1" stopColor="rgb(234,179,8)" stopOpacity="0" />
-        </radialGradient>
-        <radialGradient id="cbg-glow-orange" cx="50%" cy="50%" r="60%">
-          <stop offset="0" stopColor="rgb(249,115,22)" stopOpacity="0.9" />
-          <stop offset="1" stopColor="rgb(249,115,22)" stopOpacity="0" />
-        </radialGradient>
-        <filter id="cbg-blur" x="-100%" y="-100%" width="300%" height="300%">
-          <feGaussianBlur stdDeviation="4" />
-        </filter>
       </defs>
 
       <g transform="translate(-0.066 -30.928)">
@@ -86,13 +73,12 @@ const CircuitAnimatedBg = ({ className = "" }) => {
               transform={`translate(${line.t})`}
               pathLength="100"
               className="cbg-line"
-              stroke="rgba(160,170,255,0.55)"
-              strokeWidth="0.55"
+              stroke="url(#cbg-line-gradient)"
+              strokeWidth="0.6"
               style={{ animationDelay: `${delays[i]}s` }}
             />
           ))}
         </g>
-        
       </g>
 
       <style>{`
@@ -107,19 +93,9 @@ const CircuitAnimatedBg = ({ className = "" }) => {
 
         @keyframes cbg-flow {
           0%   { stroke-dashoffset: 100; opacity: 0; }
-          8%   { opacity: 1; }
-          70%  { opacity: 1; }
+          8%   { opacity: 0.9; }
+          70%  { opacity: 0.9; }
           100% { stroke-dashoffset: -22; opacity: 0; }
-        }
-
-        .cbg-pulse {
-          animation: cbg-pulse 3s ease-in-out infinite;
-          transform-origin: center;
-        }
-
-        @keyframes cbg-pulse {
-          0%, 100% { opacity: 0.35; transform: scale(0.9); }
-          50%      { opacity: 1;    transform: scale(1.15); }
         }
       `}</style>
     </svg>
