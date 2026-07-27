@@ -33,9 +33,9 @@ const CTA = () => {
             Today
           </h2>
 
-          <button className="mt-8 sm:mt-10 rounded-lg bg-gradient-to-r from-[#5B3FE0] to-[#8B6CFF] px-8 py-3.5 text-sm sm:text-base font-medium text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(123,97,255,0.5)]">
+          {/* <button className="mt-8 sm:mt-10 rounded-lg bg-gradient-to-r from-[#5B3FE0] to-[#8B6CFF] px-8 py-3.5 text-sm sm:text-base font-medium text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(123,97,255,0.5)]">
             Get Started Now
-          </button>
+          </button> */}
         </div>
       </div>
 
