@@ -67,12 +67,10 @@ const Counter = ({ end, suffix = "", duration = 1500 }) => {
 };
 
 const Community = () => {
-  const [activeTab, setActiveTab] = useState(0);
-
   return (
     <section
       id="community"
-      className="w-full bg-[#05060B] px-5 py-16 sm:py-20 lg:py-24"
+      className="mt-[-70px] w-full bg-[#000000] px-5 py-16 sm:py-20 lg:py-24"
     >
       <div className="mx-auto max-w-[980px]">
 
@@ -92,29 +90,23 @@ const Community = () => {
         </div>
 
         {/* Tabs */}
-        <div className="mt-8 sm:mt-10 flex justify-start sm:justify-center gap-3 overflow-x-auto pb-2 sm:pb-0 no-scrollbar">
-          {tabs.map((tab, i) => {
+        <div className="mt-8 sm:mt-6 flex justify-start sm:justify-center gap-3 overflow-x-auto pb-2 sm:pb-0 no-scrollbar">
+          {tabs.map((tab) => {
             const Icon = tab.icon;
-            const active = activeTab === i;
             return (
-              <button
+              <div
                 key={tab.name}
-                onClick={() => setActiveTab(i)}
-                className={`flex shrink-0 items-center gap-2 rounded-xl px-5 py-3 text-sm font-medium transition-all duration-300 ${
-                  active
-                    ? "bg-gradient-to-r from-[#5B3FE0] to-[#8B6CFF] text-white"
-                    : "border border-white/10 bg-white/[0.03] text-gray-300 hover:bg-white/[0.06]"
-                }`}
+                className="flex shrink-0 items-center gap-2 rounded-full border border-white/10 bg-[#0D0D12] px-6 py-3 text-sm font-medium text-gray-300"
               >
                 <Icon size={16} />
                 {tab.name}
-              </button>
+              </div>
             );
           })}
         </div>
 
         {/* Content grid */}
-        <div className="mt-12 sm:mt-16 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="mt-12 sm:-mt-14 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
           {/* Left column */}
           <div>
@@ -135,36 +127,6 @@ const Community = () => {
                 </li>
               ))}
             </ul>
-
-            {/* Stats */}
-            <div className="glow-border-card relative rounded-2xl border border-[#3a4a8f]/70 bg-white/[0.02] p-6 sm:p-8 transition-transform duration-300 hover:-translate-y-1 hover:border-[#3a4a8f] mt-8 grid grid-cols-3 divide-x divide-white/10 rounded-xl border border-white/10 bg-white/[0.02]">
-              <div className="flex flex-col items-center justify-center px-2 py-5 text-center">
-                <span className="text-xl sm:text-2xl font-semibold bg-gradient-to-r from-[#C084FC] to-[#7B61FF] bg-clip-text text-transparent">
-                  <Counter end={50} suffix="+" />
-                </span>
-                <span className="mt-1 text-[11px] sm:text-xs text-gray-400">
-                  Activation Packages
-                </span>
-              </div>
-
-              <div className=" flex flex-col items-center justify-center px-2 py-5 text-center">
-                <span className="text-xl sm:text-2xl font-semibold bg-gradient-to-r from-[#7B9CFF] to-[#5B8CFF] bg-clip-text text-transparent">
-                  <Counter end={1000} suffix="+" />
-                </span>
-                <span className="mt-1 text-[11px] sm:text-xs text-gray-400">
-                  Smart Contract Automation
-                </span>
-              </div>
-
-              <div className="flex flex-col items-center justify-center px-2 py-5 text-center">
-                <span className="text-xl sm:text-2xl font-semibold text-white">
-                  24/7
-                </span>
-                <span className="mt-1 text-[11px] sm:text-xs text-gray-400">
-                  Blockchains Operations
-                </span>
-              </div>
-            </div>
           </div>
 
           {/* Right column - local image */}

@@ -72,12 +72,12 @@ const stats = [
 
 const Stats = () => {
   return (
-    <section className="w-full bg-[#05060B] px-5 py-16 sm:py-20 lg:py-24">
-      <div className="mx-auto flex max-w-[980px] flex-col items-center gap-10 sm:flex-row sm:items-center sm:justify-center sm:gap-6 lg:gap-10">
+    <section className="mt-[-170px] w-full bg-[#000000] px-3 xs:px-5 py-16 sm:py-20 lg:py-24">
+      <div className="mx-auto flex max-w-[980px] flex-row flex-nowrap items-center justify-center gap-[clamp(6px,2vw,24px)] sm:gap-6 lg:gap-10">
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className="relative flex aspect-square w-[240px] shrink-0 items-center justify-center rounded-full border border-white/10 sm:w-[220px] lg:w-[290px]"
+            className="relative flex aspect-square w-[clamp(84px,26vw,130px)] shrink-0 items-center justify-center rounded-full border border-white/10 sm:w-[220px] lg:w-[290px]"
           >
             {stat.glow && (
               <div
@@ -89,11 +89,11 @@ const Stats = () => {
               />
             )}
 
-            <div className="relative z-10 flex flex-col items-center text-center px-4">
-              <span className="text-[40px] sm:text-[42px] lg:text-[52px] font-light text-white">
+            <div className="relative z-10 flex flex-col items-center text-center px-[clamp(4px,1.5vw,10px)] sm:px-4">
+              <span className="text-[clamp(15px,5vw,20px)] sm:text-[42px] lg:text-[52px] font-light text-white">
                 {stat.value}
               </span>
-              <span className="mt-3 text-xs sm:text-sm text-gray-400">
+              <span className="mt-1 sm:mt-3 text-[clamp(8px,2.4vw,10.5px)] sm:text-sm leading-tight text-gray-400">
                 {stat.label}
               </span>
             </div>

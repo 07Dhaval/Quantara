@@ -7,11 +7,11 @@ import EcosystemHighlights from "../components/about/Ecosystemhighlights";
 const About = () => {
   return (
     <>
-      <Hero />
-      <CoinDetail />
+      {/* <Hero />
+      <CoinDetail /> */}
       <HowItWorks />
-      <ArchitecturalTrust />
-      <EcosystemHighlights />
+      {/* <ArchitecturalTrust />
+      <EcosystemHighlights /> */}
     </>
   );
 };

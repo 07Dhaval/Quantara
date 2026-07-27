@@ -1,11 +1,15 @@
 import ctaVideo from "../assets/video/cta.mp4";
+
 const CTA = () => {
   return (
     <section
       id="cta"
-      className="w-full bg-[#05060B] px-5 py-20 sm:py-24 lg:py-28"
+      className="mt-[-100px] w-full bg-[#000000] px-5 py-20 sm:py-24 lg:py-28"
     >
-      <div className="glow-border-card relative mx-auto max-w-[980px] h-[450px] text-center overflow-hidden rounded-2xl border border-[#3a4a8f]/70">
+      <div className="glow-border-card relative mx-auto max-w-[980px] h-[450px] text-center overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-8 transition-transform duration-300 hover:-translate-y-1 hover:border-white/20">
+        {/* Animated moving glow border */}
+        <div className="cta-glow-ring pointer-events-none absolute inset-0 rounded-2xl" />
+
         {/* Background Video */}
         <video
           autoPlay
@@ -34,6 +38,40 @@ const CTA = () => {
           </button>
         </div>
       </div>
+
+      <style>{`
+        @property --cta-angle {
+          syntax: '<angle>';
+          inherits: false;
+          initial-value: 0deg;
+        }
+
+        .cta-glow-ring {
+          z-index: 5;
+          padding: 2px;
+          background: conic-gradient(
+            from var(--cta-angle),
+            #7D5CFF,
+            #6F7BFF,
+            #BBA6FF,
+            #4FA6E8,
+            #7D5CFF
+          );
+          -webkit-mask:
+            linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          animation: cta-rotate-border 4s linear infinite;
+          filter: drop-shadow(0 0 10px rgba(123, 97, 255, 0.6));
+        }
+
+        @keyframes cta-rotate-border {
+          to {
+            --cta-angle: 360deg;
+          }
+        }
+      `}</style>
     </section>
   );
 };

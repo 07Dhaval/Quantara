@@ -25,14 +25,14 @@ const items = [
 
 const FeatureBlock = ({ item, align = "left" }) => (
   <div
-    className={`relative flex flex-col ${
+    className={`relative flex flex-col items-center text-center ${
       align === "right" ? "lg:items-end lg:text-right" : "lg:items-start lg:text-left"
     }`}
   >
-    <span className="pointer-events-none select-none text-[64px] sm:text-[80px] lg:text-[96px] font-bold leading-none text-white/[0.06]">
+    <span className="pointer-events-none select-none text-[48px] xs:text-[56px] sm:text-[80px] lg:text-[96px] font-bold leading-none text-white/[0.06]">
       {item.number}
     </span>
-    <h3 className="-mt-6 sm:-mt-8 lg:-mt-9 text-xl sm:text-2xl font-medium text-white">
+    <h3 className="-mt-4 xs:-mt-5 sm:-mt-8 lg:-mt-9 text-lg xs:text-xl sm:text-2xl font-medium text-white">
       {item.title}
     </h3>
     <p className="mt-3 max-w-[340px] text-sm sm:text-base leading-6 text-gray-400">
@@ -45,20 +45,20 @@ const Ecosystem = () => {
   return (
     <section
       id="ecosystem"
-      className="relative w-full bg-[#05060B] px-5 py-20 sm:py-24 lg:py-28 overflow-hidden"
+      className="-mt-10 relative w-full bg-[#000000] px-4 xs:px-5 py-16 sm:py-24 lg:py-28 overflow-hidden"
     >
-      <div className="mx-auto max-w-[980px]">
+      <div className="-mt-15 mx-auto max-w-[980px]">
 
         {/* Heading */}
         <div className="mx-auto max-w-[760px] text-center">
-          <h2 className="text-[30px] sm:text-[40px] lg:text-[48px] leading-[1.15] font-light text-white">
+          <h2 className="text-[24px] xs:text-[28px] sm:text-[40px] lg:text-[48px] leading-[1.15] font-light text-white">
             Powering{" "}
             <span className="bg-gradient-to-r from-[#7D5CFF] via-[#6F7BFF] to-[#BBA6FF] bg-clip-text text-transparent">
               Decentralized
             </span>{" "}
             Ecosystem
           </h2>
-          <p className="mt-5 text-sm sm:text-base leading-7 text-gray-400 px-2">
+          <p className="mt-2 sm:mt-2 text-sm sm:text-base leading-6 sm:leading-7 text-gray-400 px-1 xs:px-2">
             This high-performance framework ensures that every operation from
             cross-chain settlements to large-scale asset tokenization is
             executed with ironclad security and predictable,.
@@ -66,7 +66,7 @@ const Ecosystem = () => {
         </div>
 
         {/* Quadrants + center logo (desktop) */}
-        <div className="relative mt-16 sm:mt-20 lg:mt-24">
+        <div className="relative mt-12 sm:mt-20 lg:mt-4">
 
           {/* Center logo - desktop only, absolutely centered */}
           <div className="hidden lg:flex absolute inset-0 items-center justify-center pointer-events-none">
@@ -77,27 +77,17 @@ const Ecosystem = () => {
             />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-14 lg:gap-y-24 gap-x-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-10 sm:gap-y-14 lg:gap-y-24 gap-x-10">
             <div className="order-1">
               <FeatureBlock item={items[0]} align="left" />
             </div>
             <div className="order-2">
               <FeatureBlock item={items[1]} align="right" />
             </div>
-
-            {/* Mobile logo - sits between item 2 and item 3, hidden on desktop */}
-            <div className="order-3 flex lg:hidden justify-center py-4">
-              <img
-                src={logo}
-                alt="Quantara"
-                className="w-[140px] h-[140px] object-contain drop-shadow-[0_0_50px_rgba(123,97,255,0.45)]"
-              />
-            </div>
-
-            <div className="order-4">
+            <div className="order-3">
               <FeatureBlock item={items[2]} align="left" />
             </div>
-            <div className="order-5">
+            <div className="order-4">
               <FeatureBlock item={items[3]} align="right" />
             </div>
           </div>

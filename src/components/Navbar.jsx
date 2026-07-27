@@ -25,10 +25,10 @@ const Navbar = () => {
 
   // "to" ab actual page routes hain, "#" anchors nahi
   const navLinks = [
-    { name: "Home", to: "/" },
-    { name: "About", to: "/about" },
-    { name: "Features", to: "/features" },
-    { name: "Blog", to: "/blog" },
+    // { name: "Home", to: "/" },
+    // { name: "About", to: "/about" },
+    // { name: "Features", to: "/features" },
+    // { name: "Blog", to: "/blog" },
   ];
 
   return (
@@ -53,14 +53,13 @@ const Navbar = () => {
 
       <div className="max-w-[980px] mx-auto px-5 lg:px-8">
         <div className="h-[110px] flex items-center justify-between">
-
           {/* Logo */}
 
           <Link to="/" className="flex items-center">
             <img
               src={logo}
               alt="Quantara"
-              className="h-10 sm:h-11 md:h-28 w-auto object-contain"
+              className="h-30 sm:h-20 md:h-38 w-auto object-contain"
             />
           </Link>
 
@@ -87,9 +86,11 @@ const Navbar = () => {
           {/* CTA */}
 
           <div className="hidden lg:block">
-            <button className="rounded-xl border border-white/15 bg-white/5 backdrop-blur-xl px-8 py-3 text-[15px] font-medium text-white transition-all duration-300 hover:border-[#7B61FF] hover:bg-[#7B61FF]/15 hover:shadow-[0_0_30px_rgba(123,97,255,0.35)]">
-              Explore Quantara
-            </button>
+            <Link to="/register">
+              <button className="glow-border-card relative rounded-2xl border border-white/10 bg-white/[0.02] px-8 py-3 text-[15px] font-medium text-white transition-all duration-300 hover:-translate-y-1 hover:border-[#7B61FF] hover:bg-[#7B61FF]/15 hover:shadow-[0_0_30px_rgba(123,97,255,0.35)]">
+                Explore Quantara
+              </button>
+            </Link>
           </div>
 
           {/* Mobile Toggle */}
@@ -100,7 +101,6 @@ const Navbar = () => {
           >
             {menuOpen ? <X size={30} /> : <Menu size={30} />}
           </button>
-
         </div>
       </div>
 
@@ -112,9 +112,7 @@ const Navbar = () => {
         }`}
       >
         <div className="border-t border-white/10 bg-[#071221]/95 backdrop-blur-xl px-6 py-6">
-
           <div className="flex flex-col gap-5">
-
             {navLinks.map((item) => (
               <NavLink
                 key={item.name}
@@ -126,12 +124,12 @@ const Navbar = () => {
               </NavLink>
             ))}
 
-            <button className="mt-4 rounded-xl border border-white/15 bg-white/5 py-3 text-white backdrop-blur-xl">
-              Explore Quantara
-            </button>
-
+            <Link to="/register" onClick={() => setMenuOpen(false)}>
+              <button className="glow-border-card relative mt-4 w-full rounded-2xl border border-white/10 bg-white/[0.02] py-3 text-white transition-all duration-300 hover:-translate-y-1 hover:border-[#7B61FF] backdrop-blur-xl">
+                Explore Quantara
+              </button>
+            </Link>
           </div>
-
         </div>
       </div>
     </header>

@@ -46,8 +46,8 @@ const Reveal = ({ children, delay = 0, className = "" }) => {
 
 // Orbiting icon ring: an SVG dashed orbit path with the icons rotating
 // continuously around the center, each icon counter-rotated so it stays upright.
-// Wrapped in a scale transform so it shrinks gracefully on very narrow phones
-// (e.g. iPhone 13 mini) without touching the internal geometry/math.
+// Circle/orbit size reduced (170px -> 130px container, r=70 -> r=52) so the
+// ring reads smaller inside the Blockchain Infrastructure card.
 const OrbitIconRing = () => {
   const orbitIcons = [
     { Icon: Bitcoin, color: "#F7931A", angle: -10 },
@@ -57,45 +57,52 @@ const OrbitIconRing = () => {
   ];
 
   return (
-    <div className="absolute right-1.5 top-1.5 sm:right-4 sm:top-4 scale-[0.62] xs:scale-[0.7] sm:scale-100 origin-top-right">
-      <div className="orbit-wrap relative h-[150px] w-[170px]">
-        {/* soft ambient glow behind the ring */}
-        <div className="orbit-glow absolute inset-0 rounded-full" />
+    <div className="relative -translate-x-1 translate-y-1 sm:translate-x-0 sm:translate-y-0">
+      <div
+        style={{
+          transform: "scale(clamp(0.5, calc(100vw / 640px), 1))",
+          transformOrigin: "center",
+        }}
+      >
+        <div className="orbit-wrap relative h-[114px] w-[130px]">
+          {/* soft ambient glow behind the ring */}
+          <div className="orbit-glow absolute inset-0 rounded-full" />
 
-        {/* dashed orbit path */}
-        <svg viewBox="0 0 170 170" className="absolute inset-0 h-full w-full">
-          <circle
-            cx="85"
-            cy="85"
-            r="70"
-            fill="none"
-            stroke="url(#orbitStroke)"
-            strokeWidth="1"
-            strokeDasharray="2 6"
-          />
-          <defs>
-            <linearGradient id="orbitStroke" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#7B61FF" stopOpacity="0.7" />
-              <stop offset="100%" stopColor="#5B61FF" stopOpacity="0.15" />
-            </linearGradient>
-          </defs>
-        </svg>
+          {/* dashed orbit path */}
+          <svg viewBox="0 0 130 130" className="absolute inset-0 h-full w-full">
+            <circle
+              cx="65"
+              cy="65"
+              r="52"
+              fill="none"
+              stroke="url(#orbitStroke)"
+              strokeWidth="1"
+              strokeDasharray="2 6"
+            />
+            <defs>
+              <linearGradient id="orbitStroke" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#7B61FF" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="#5B61FF" stopOpacity="0.15" />
+              </linearGradient>
+            </defs>
+          </svg>
 
-        {/* rotating group holding the icon nodes */}
-        <div className="orbit-spin absolute inset-0">
-          {orbitIcons.map(({ Icon, color, angle }, i) => (
-            <div
-              key={i}
-              className="absolute left-1/2 top-1/2 h-9 w-9 sm:h-10 sm:w-10"
-              style={{
-                transform: `rotate(${angle}deg) translate(70px) rotate(-${angle}deg) translate(-50%, -50%)`,
-              }}
-            >
-              <div className="orbit-counter-spin flex h-full w-full items-center justify-center rounded-full bg-white shadow-[0_0_12px_rgba(123,97,255,0.35)]">
-                <Icon size={16} style={{ color }} />
+          {/* rotating group holding the icon nodes */}
+          <div className="orbit-spin absolute inset-0">
+            {orbitIcons.map(({ Icon, color, angle }, i) => (
+              <div
+                key={i}
+                className="absolute left-1/2 top-1/2 h-9 w-9 sm:h-10 sm:w-10"
+                style={{
+                  transform: `rotate(${angle}deg) translate(52px) rotate(-${angle}deg) translate(-50%, -50%)`,
+                }}
+              >
+                <div className="orbit-counter-spin flex h-full w-full items-center justify-center rounded-full bg-white shadow-[0_0_12px_rgba(123,97,255,0.35)]">
+                  <Icon size={16} style={{ color }} />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -106,9 +113,14 @@ const CoreProtocol = () => {
   return (
     <section
       id="core-protocol"
-      className="relative w-full bg-[#05060B] px-4 sm:px-5 py-20 sm:py-24 lg:py-28 overflow-hidden"
+      className="relative w-full bg-[#000000] px-4 sm:px-5 py-20 sm:py-24 lg:py-28 overflow-hidden"
     >
       <style>{`
+        @property --border-angle {
+          syntax: '<angle>';
+          initial-value: 0deg;
+          inherits: false;
+        }
         @keyframes orbit-spin {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
@@ -153,6 +165,9 @@ const CoreProtocol = () => {
           transform-origin: center;
           animation: node-pulse 3.2s ease-in-out infinite;
         }
+        @keyframes border-rotate {
+          to { --border-angle: 360deg; }
+        }
         .glow-border-card {
           position: relative;
           isolation: isolate;
@@ -164,7 +179,7 @@ const CoreProtocol = () => {
           border-radius: inherit;
           padding: 1px;
           background: conic-gradient(
-            from 0deg,
+            from var(--border-angle),
             #3ED1D1,
             #4F7CFF 30%,
             #7B61FF 55%,
@@ -178,6 +193,7 @@ const CoreProtocol = () => {
           mask-composite: exclude;
           z-index: -1;
           opacity: 0.95;
+          animation: border-rotate 2.2s linear infinite;
         }
       `}</style>
 
@@ -215,12 +231,12 @@ const CoreProtocol = () => {
               </p>
 
               <div className="mt-6 sm:mt-8 flex flex-col xs:flex-row items-center justify-center sm:justify-between gap-5 sm:gap-4">
-                <button className="w-full xs:w-auto shrink-0 rounded-lg bg-gradient-to-r from-[#5B3FE0] to-[#8B6CFF] px-6 py-3 text-sm sm:text-[15px] font-medium text-white transition-transform duration-300 hover:scale-105">
+                {/* <button className="w-full xs:w-auto shrink-0 rounded-lg bg-gradient-to-r from-[#5B3FE0] to-[#8B6CFF] px-6 py-3 text-sm sm:text-[15px] font-medium text-white transition-transform duration-300 hover:scale-105">
                   Learn More
-                </button>
+                </button> */}
 
                 {/* Node diagram */}
-                <div className="relative block w-full max-w-[160px] xs:max-w-[120px] sm:max-w-[180px] h-[80px] sm:h-[100px] shrink-0 opacity-90 mx-auto xs:mx-0">
+                <div className="relative block w-full max-w-[150px] xs:max-w-[120px] sm:max-w-[180px] h-[80px] sm:h-[100px] shrink-0 opacity-90 mx-auto xs:mx-0">
                   <svg
                     viewBox="0 0 180 100"
                     className="absolute inset-0 w-full h-full"
@@ -243,7 +259,7 @@ const CoreProtocol = () => {
                     <circle
                       cx="20"
                       cy="50"
-                      r="3"
+                      r="2"
                       fill="#7B61FF"
                       className="wire-node"
                     />
@@ -279,20 +295,20 @@ const CoreProtocol = () => {
             {/* Blockchain Infrastructure */}
             <Reveal
               delay={200}
-              className="glow-border-card relative rounded-2xl border border-[#3a4a8f]/60 bg-white/[0.02] p-5 sm:p-8 transition-transform duration-300 hover:-translate-y-1 hover:border-[#3a4a8f]"
+              className="glow-border-card relative rounded-2xl border border-[#3a4a8f]/60 bg-white/[0.02] p-4 xs:p-5 sm:p-8 transition-transform duration-300 hover:-translate-y-1 hover:border-[#3a4a8f]"
             >
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 sm:gap-4">
-                <div className="max-w-[280px]">
-                  <h3 className="text-lg sm:text-2xl font-medium text-white">
+              <div className="flex flex-row items-center justify-between gap-3 sm:gap-4">
+                <div className="min-w-0 flex-1 sm:max-w-[280px]">
+                  <h3 className="text-base xs:text-lg sm:text-2xl font-medium text-white">
                     Blockchain Infrastructure
                   </h3>
-                  <p className="mt-2 sm:mt-3 text-sm sm:text-base text-gray-400">
+                  <p className="mt-1.5 xs:mt-2 sm:mt-3 text-xs xs:text-sm sm:text-base text-gray-400">
                     Decentralized technology built for trust and reliability.
                   </p>
                 </div>
 
-                {/* orbiting SVG icon ring, now sits in normal flow instead of overlapping */}
-                <div className="shrink-0 mx-auto sm:mx-0">
+                {/* orbiting SVG icon ring, always pinned to the right of the text */}
+                <div className="shrink-0">
                   <OrbitIconRing />
                 </div>
               </div>

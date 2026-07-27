@@ -87,7 +87,7 @@ const PhaseImage = ({ image, title }) => (
 
 const HowItWorks = () => {
   return (
-    <section className="w-full bg-[#050B14] px-5 py-16 sm:py-20 lg:py-28">
+    <section className="mt-[-70px] w-full bg-[#000000] px-5 py-16 sm:py-20 lg:py-28">
       <div className="max-w-[900px] mx-auto">
         {/* Heading */}
         <div className="text-center max-w-[720px] mx-auto">
@@ -105,16 +105,28 @@ const HowItWorks = () => {
           </p>
         </div>
 
-        {/* Mobile / Tablet: single column, true order, small dotted line on the left */}
-        <div className="mt-14 sm:mt-16 lg:hidden relative pl-6">
-          <div className="absolute left-[7px] top-2 bottom-2 w-px bg-white/15" />
-          <div className="flex flex-col gap-14">
+        {/* Mobile / Tablet: single column, centered, fully responsive down to iPhone 13 mini (375px) */}
+        <div className="mt-14 sm:mt-16 lg:hidden flex flex-col items-center">
+          <div className="flex flex-col items-center gap-14 w-full max-w-[420px] mx-auto">
             {allPhasesInOrder.map((p) => (
-              <div key={p.phase} className="relative">
-                <div className="absolute -left-6 top-2 w-[9px] h-[9px] rounded-full bg-[#7B61FF] shadow-[0_0_12px_rgba(123,97,255,0.8)]" />
-                <PhaseImage image={p.image} title={p.title} />
-                <div className="mt-5">
-                  <PhaseText {...p} />
+              <div
+                key={p.phase}
+                className="w-full flex flex-col items-center text-center"
+              >
+                <span className="w-[9px] h-[9px] rounded-full bg-[#7B61FF] shadow-[0_0_12px_rgba(123,97,255,0.8)] mb-4" />
+                <div className="w-full">
+                  <PhaseImage image={p.image} title={p.title} />
+                </div>
+                <div className="mt-5 w-full flex flex-col items-center">
+                  <span className="text-white/40 text-xs sm:text-[13px] tracking-wide">
+                    {p.phase}
+                  </span>
+                  <h3 className="mt-1 text-white text-xl sm:text-2xl font-semibold">
+                    {p.title}
+                  </h3>
+                  <p className="mt-2 text-white/50 text-sm sm:text-[15px] leading-relaxed max-w-[340px] mx-auto">
+                    {p.description}
+                  </p>
                 </div>
               </div>
             ))}

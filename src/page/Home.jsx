@@ -6,12 +6,14 @@ import Community from "../components/Community";
 import Stats from "../components/Stats";
 import FAQ from "../components/FAQ";
 import CTA from "../components/CTA";
+import HowItWorks from "../components/about/Howitworks";
 
 const Home = () => {
   return (
     <>
       <Hero />
       <CoreProtocol />
+      <HowItWorks />
       <Ecosystem />
       <Security />
       <Community />

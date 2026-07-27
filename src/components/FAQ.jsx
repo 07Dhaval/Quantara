@@ -46,7 +46,7 @@ const FAQ = () => {
   return (
     <section
       id="faq"
-      className="w-full bg-[#05060B] px-5 py-16 sm:py-20 lg:py-24"
+      className="mt-[-110px] w-full bg-[#000000] px-5 py-16 sm:py-20 lg:py-24"
     >
       <div className="mx-auto max-w-[980px]">
 
@@ -76,13 +76,13 @@ const FAQ = () => {
                 onMouseEnter={() => handleEnter(i)}
                 onMouseLeave={handleLeave}
                 onClick={() => handleClick(i)}
-                className={`cursor-pointer rounded-xl p-[1px] transition-all duration-300 ${
+                className={`glow-border-card relative rounded-2xl border border-white/10 bg-white/[0.02] p-1 sm:p-1 transition-transform duration-300 hover:-translate-y-1 hover:border-white/20 cursor-pointer transition-all ${
                   isOpen
                     ? "bg-gradient-to-r from-[#7B61FF] via-[#5B7BFF] to-[#4FA6E8]"
                     : "bg-white/10"
                 }`}
               >
-                <div className="rounded-[11px] bg-[#05060B] px-5 sm:px-7 py-5 sm:py-6">
+                <div className="rounded-[11px] bg-[#000000] px-5 sm:px-7 py-5 sm:py-6">
                   <div className="flex items-center justify-between gap-4">
                     <h3 className="text-base sm:text-lg font-medium text-white">
                       {faq.question}
