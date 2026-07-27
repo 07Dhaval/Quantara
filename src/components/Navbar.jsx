@@ -86,7 +86,7 @@ const Navbar = () => {
           {/* CTA */}
 
           <div className="hidden lg:block">
-            <Link to="/register">
+            <Link to="/connect-wallet">
               <button className="glow-border-card relative rounded-2xl border border-white/10 bg-white/[0.02] px-8 py-3 text-[15px] font-medium text-white transition-all duration-300 hover:-translate-y-1 hover:border-[#7B61FF] hover:bg-[#7B61FF]/15 hover:shadow-[0_0_30px_rgba(123,97,255,0.35)]">
                 Explore Quantara
               </button>
@@ -124,7 +124,7 @@ const Navbar = () => {
               </NavLink>
             ))}
 
-            <Link to="/register" onClick={() => setMenuOpen(false)}>
+            <Link to="/connect-wallet" onClick={() => setMenuOpen(false)}>
               <button className="glow-border-card relative mt-4 w-full rounded-2xl border border-white/10 bg-white/[0.02] py-3 text-white transition-all duration-300 hover:-translate-y-1 hover:border-[#7B61FF] backdrop-blur-xl">
                 Explore Quantara
               </button>

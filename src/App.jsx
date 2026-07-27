@@ -6,6 +6,7 @@ import About from "./page/About";
 import Feature from "./page/Feature";
 import Blog from "./page/Blog";
 import Register from "./page/Register";
+import ConnectWallet from "./page/ConnectWallet";
 import FAQ from "./components/FAQ";
 import CTA from "./components/CTA";
 
@@ -13,7 +14,9 @@ function App() {
   const location = useLocation();
 
   // Auth-style pages don't need the marketing FAQ/CTA blocks underneath them
-  const hideMarketingSections = ["/register"].includes(location.pathname);
+  const hideMarketingSections = ["/register", "/connect-wallet"].includes(
+    location.pathname
+  );
 
   return (
     <>
@@ -25,6 +28,7 @@ function App() {
         <Route path="/features" element={<Feature />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/connect-wallet" element={<ConnectWallet />} />
       </Routes>
 
       {!hideMarketingSections && (
